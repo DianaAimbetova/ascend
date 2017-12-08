@@ -9,31 +9,35 @@ public class AscendingSequence {
     }
 
 
-    public static boolean isAscendingSequence(int num) {
+    public static boolean isAscendingSequence(int num) { //num - число, например 123
+        //последнее число, например: 3
         int lastNumber = num%10;
-        //System.out.println("последняя цифра: " + lastNumber);
+        //число без последнего числа, например: 12
         int remain = num/10;
-      //  System.out.println("остаток без последней цифры: " + remain);
+        //флаги для установки возрастающий или нет, по умолчанию false
         boolean ascend = false;
         boolean descend = false;
+        //пока не осталось последней цифры
         while(remain>0){
+            //последнее число остатка, например: 2
             int currentNumber = remain%10;
-            //System.out.println("предпоследняя цифра: " + currentNumber);
+            //если следующее число меньше предыдущего, например: 2>3(значит тут false)
             if(currentNumber > lastNumber) {
-              //  System.out.println("if1");
-                descend = true;
+                descend = true; //значит убывающий
+                //если следующее число больше предыдущего, например 2<3(значит тут true)
             } else if(currentNumber < lastNumber) {
-             //   System.out.println("if2");
-                ascend = true;
+                ascend = true;//значит возрастающий
             }
-            lastNumber = currentNumber;
-            //System.out.println(lastNumber);
-            remain /= 10;
-            //System.out.println(remain);
+            //пересохраняем данные для перехощда на следующие цифры
+            lastNumber = currentNumber; // теперь lastNumber = 2
+            remain /= 10; // теперь remain=1
         }
+        //если флаг возрастающего true и флаг убывающего false
         if(ascend && !descend) {
+            //возвращаем true
             return true;
         }
+        //иначе false
         return false;
 
     }
